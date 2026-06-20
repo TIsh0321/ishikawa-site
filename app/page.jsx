@@ -259,11 +259,11 @@ export default function ResearcherSite() {
     },
   ];
 
-  const courses = [
-    { uni: "旭川医科大学 医学部", items: ["医療情報学", "臨床疫学", "保健統計", "衛生・公衆衛生学", "基礎医学特論"] },
-    { uni: "北海道大学 大学院", items: ["医療マネジメント特講"] },
-    { uni: "小樽商科大学 大学院", items: ["地域ヘルスケアマネジメント"] },
-    { uni: "一橋大学 / 成城大学 / 文京学院大学", items: ["医療産業論", "データ解析入門Ⅰ・Ⅱ", "医療と経済・社会"] },
+const courses = [
+    { uni: "公衆衛生・疫学", items: ["衛生・公衆衛生学", "臨床疫学", "保健統計", "医療政策学"] },
+    { uni: "データサイエンス", items: ["医療情報学", "データ解析入門Ⅰ・Ⅱ", "基礎医学特論"] },
+    { uni: "医療経営", items: ["医療マネジメント特講", "地域ヘルスケアマネジメント", "病院経営ケーススタディ"] },
+    { uni: "経済", items: ["医療経済学", "医療産業論", "医療と経済・社会"] },
   ];
 
   const tools = [
@@ -276,8 +276,8 @@ export default function ResearcherSite() {
       body: "行政ビッグデータ分析基盤を用い、CT・MRIの地域差と共同利用の実態を地図とグラフで示す。",
     },
     {
-      name: "RStudio による線量・統計分析",
-      body: "再現可能な分析パイプライン。記述統計から時系列・空間分析、機械学習（SHAPによる寄与度評価）まで。",
+      name: "RStudioによる統計分析からレポーティング",
+      body: "再現可能な分析パイプライン。記述統計から時系列・空間分析、機械学習（SHAP分析）まで。",
     },
   ];
 
@@ -336,7 +336,7 @@ export default function ResearcherSite() {
           <Reveal delay={350}>
             <p className="mt-10 text-stone-600 leading-loose text-sm md:text-base" style={{ fontFamily: "var(--sans)" }}>
               大規模レセプト・電子カルテデータの分析を通じて、<br />
-              医療提供体制と政策の根拠をかたちにします。
+              医療提供体制や需給実態を投影する。
             </p>
           </Reveal>
           <Reveal delay={500}>
