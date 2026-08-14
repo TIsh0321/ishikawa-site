@@ -70,6 +70,37 @@ function NetworkBg({ opacity = 0.4 }) {
   );
 }
 
+// 幾何学的な透かし（同心円＋放射線）
+function GeoBg({ className, opacity = 0.06 }) {
+  return (
+    <svg className={className} viewBox="0 0 400 400" aria-hidden="true" style={{ opacity }}>
+      <g fill="none" stroke="#4a6b93" strokeWidth="1">
+        {[50, 95, 140, 185].map((r) => (
+          <circle key={r} cx="200" cy="200" r={r} />
+        ))}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const a = (i * Math.PI) / 6;
+          return (
+            <line
+              key={i}
+              x1={200 + Math.cos(a) * 50}
+              y1={200 + Math.sin(a) * 50}
+              x2={200 + Math.cos(a) * 185}
+              y2={200 + Math.sin(a) * 185}
+            />
+          );
+        })}
+      </g>
+      <g fill="#4a6b93">
+        {[0, 3, 6, 9].map((i) => {
+          const a = (i * Math.PI) / 6;
+          return <circle key={i} cx={200 + Math.cos(a) * 140} cy={200 + Math.sin(a) * 140} r="4" />;
+        })}
+      </g>
+    </svg>
+  );
+}
+
 export default function Home() {
   const interests = ["医療情報学", "医療政策", "医療経済", "臨床疫学"];
 
@@ -94,11 +125,16 @@ export default function Home() {
     },
   ];
 
-  const positions = [
+  const concurrent = [
     { year: "2026.04 –", text: "自治医科大学 データサイエンスセンター 客員研究員" },
-    { year: "2026.01 –", text: "旭川医科大学 社会医学講座 講師" },
     { year: "2023.04 –", text: "北海道大学 大学院保健科学研究院 客員准教授" },
     { year: "2023.04 –", text: "東京大学 大学院医学系研究科 客員研究員" },
+  ];
+
+  const pastPositions = [
+    { year: "2024 – 2025", text: "OECD 雇用労働社会問題局（DELSA）" },
+    { year: "2022.10 – 2025", text: "医療経済研究機構 主席研究員" },
+    { year: "2017.04 – 2018", text: "北海道大学 大学院保健科学研究院 助教／特任助教" },
   ];
 
   const education = [
@@ -194,21 +230,21 @@ export default function Home() {
   return (
     <div
       className="min-h-screen bg-white text-[#2b3742] antialiased"
-      style={{ ["--sans"]: "'Inter', 'Noto Sans JP', sans-serif", fontFamily: "var(--sans)" }}
+      style={{ ["--sans"]: "'Noto Sans JP', sans-serif", fontFamily: "var(--sans)" }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
         html { scroll-behavior: smooth; }
       `}</style>
 
       {/* ── ヘッダー ── */}
       <header className="fixed top-0 inset-x-0 z-40 bg-white/85 backdrop-blur-sm border-b border-black/5">
         <div className="max-w-5xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between">
-          <a href="#top" className="text-sm tracking-wide font-medium">
+          <a href="#top" className="text-sm tracking-wide font-bold">
             石川 智基
-            <span className="text-[#7a8794] font-normal ml-2 text-xs tracking-[0.2em]">TOMOKI ISHIKAWA</span>
+            <span className="text-[#7a8794] font-semibold ml-2 text-xs tracking-[0.2em]">TOMOKI ISHIKAWA</span>
           </a>
-          <nav className="flex gap-5 md:gap-6 text-xs tracking-[0.16em] text-[#55636f]">
+          <nav className="flex gap-5 md:gap-6 text-xs tracking-[0.16em] text-[#3c4854] font-bold">
             <a href="#about" className="hover:text-[#4a6b93]">ABOUT</a>
             <a href="#research" className="hover:text-[#4a6b93]">RESEARCH</a>
             <a href="#projects" className="hover:text-[#4a6b93] hidden sm:inline">PROJECTS</a>
@@ -290,27 +326,63 @@ export default function Home() {
       </section>
 
       {/* ── 経歴 ── */}
-      <section className="px-6 py-28 md:py-36 bg-white">
-        <div className="max-w-4xl mx-auto">
+      <section className="relative px-6 py-28 md:py-36 bg-white overflow-hidden">
+        <GeoBg className="absolute -right-40 -top-24 w-[520px] h-[520px] hidden md:block" opacity={0.05} />
+        <div className="relative max-w-4xl mx-auto">
           <Reveal>
             <p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-12 text-center">CAREER</p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16">
-            <div>
-              <Reveal>
-                <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">現職</h3>
-              </Reveal>
-              <div className="space-y-5">
-                {positions.map((p, i) => (
-                  <Reveal key={p.text} delay={i * 70}>
-                    <div className="flex gap-4 text-sm">
-                      <span className="text-[#8a99a8] shrink-0 w-24 tabular-nums">{p.year}</span>
-                      <span className="text-[#3c4854] leading-relaxed">{p.text}</span>
+            {/* 左：現職＋職歴 */}
+            <div className="space-y-12">
+              <div>
+                <Reveal>
+                  <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">現職</h3>
+                </Reveal>
+                {/* 本務 */}
+                <Reveal>
+                  <div className="border border-[#4a6b93]/30 bg-[#4a6b93]/[0.05] rounded-lg p-5 mb-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[10px] tracking-[0.15em] text-white bg-[#4a6b93] rounded px-2 py-0.5">本務</span>
+                      <span className="text-xs text-[#8a99a8] tabular-nums">2026.01 –</span>
                     </div>
-                  </Reveal>
-                ))}
+                    <p className="text-[#26333d] font-medium leading-relaxed">旭川医科大学 社会医学講座 講師</p>
+                  </div>
+                </Reveal>
+                {/* 兼務 */}
+                <Reveal delay={80}>
+                  <p className="text-[11px] tracking-[0.2em] text-[#93a0af] mb-3">兼務</p>
+                </Reveal>
+                <div className="space-y-3">
+                  {concurrent.map((p, i) => (
+                    <Reveal key={p.text} delay={100 + i * 60}>
+                      <div className="flex gap-4 text-sm">
+                        <span className="text-[#8a99a8] shrink-0 w-24 tabular-nums">{p.year}</span>
+                        <span className="text-[#5b6975] leading-relaxed">{p.text}</span>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <Reveal>
+                  <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">職歴</h3>
+                </Reveal>
+                <div className="space-y-5">
+                  {pastPositions.map((p, i) => (
+                    <Reveal key={p.text} delay={i * 70}>
+                      <div className="flex gap-4 text-sm">
+                        <span className="text-[#8a99a8] shrink-0 w-24 tabular-nums">{p.year}</span>
+                        <span className="text-[#3c4854] leading-relaxed">{p.text}</span>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
               </div>
             </div>
+
+            {/* 右：学歴 */}
             <div>
               <Reveal>
                 <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">学歴</h3>
@@ -331,8 +403,9 @@ export default function Home() {
       </section>
 
       {/* ── RESEARCH（英語論文カード） ── */}
-      <section id="research" className="px-6 py-28 md:py-36 bg-[#f2f4f7] border-y border-black/5">
-        <div className="max-w-5xl mx-auto">
+      <section id="research" className="relative px-6 py-28 md:py-36 bg-[#f2f4f7] border-y border-black/5 overflow-hidden">
+        <GeoBg className="absolute -left-40 -bottom-32 w-[520px] h-[520px] hidden md:block" opacity={0.06} />
+        <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">RESEARCH</p></Reveal>
             <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#26333d]">主要な論文</h2></Reveal>
