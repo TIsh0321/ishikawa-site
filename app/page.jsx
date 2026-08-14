@@ -140,6 +140,21 @@ export default function Home() {
     },
   ];
 
+  const projects = [
+    { period: "2026.07 – 2027.03", title: "電子カルテ・レセプト統合解析による救急受診適正化モデルの構築", funder: "北海道科学技術総合振興センター（ノーステック財団） タレント補助金" },
+    { period: "2026.06 – 2027.01", title: "保健医療リアルワールドデータを用いた患者受診行動予測に基づく医療政策評価のための高度モデル分析", funder: "文部科学省 AI for Science 萌芽的挑戦研究創出事業（SPReAD）" },
+    { period: "2026.06 – 2027.03", title: "北海道における放射線治療の均てん化と集中化に向けた需給分析枠組みの開発", funder: "秋山記念生命科学振興財団" },
+    { period: "2026.06 – 2026.12", title: "救急受診適正化のための機械学習による重症予測モデルの構築と要因分析", funder: "伊藤医薬学術交流財団 海外留学学会等研究交流助成" },
+    { period: "2025.04 – 2026.03", title: "レセプトデータおよび電子カルテデータを活用した救急搬送適正評価モデルの構築", funder: "受託研究" },
+    { period: "2024.04 – 2027.03", title: "高次の医療需給を評価し医療連携政策を支援する大規模レセプトデータ分析技術の開発", funder: "日本学術振興会 科学研究費助成事業 基盤研究(C)" },
+    { period: "2024.04 – 2025.03", title: "OECDのSHA手法に適用可能な保健医療支出推計の速報化とCOVID-19関連費用算出に関する研究", funder: "厚生労働省 政策科学総合研究事業" },
+    { period: "2023", title: "リアルワールドデータを用いた「リフィル処方箋」に関する政策対応前後の比較研究", funder: "受託研究" },
+    { period: "2022.11 – 2023.12", title: "大規模レセプト・健診データベースを用いた With/Post COVID-19 における慢性疾患患者の治療継続性に関する研究", funder: "医療科学研究所 指定課題研究" },
+    { period: "2021.04 – 2023.03", title: "地域の資源配置計画に資するNDBと医療・介護連結データを用いた需給評価手法の開発", funder: "日本学術振興会 科学研究費助成事業 若手研究" },
+    { period: "2020.12 – 2021.11", title: "行政ビッグデータ分析基盤を用いた画像診断機器利用状況の可視化及び評価に関する研究", funder: "ファイザーヘルスリサーチ振興財団" },
+    { period: "2018.04 – 2022.03", title: "地域医療における需給評価手法の開発：NDBを活用した将来予測モデル構築", funder: "日本学術振興会 科学研究費助成事業 若手研究" },
+  ];
+
   const courses = [
     {
       field: "データサイエンス",
@@ -193,9 +208,10 @@ export default function Home() {
             石川 智基
             <span className="text-[#7a8794] font-normal ml-2 text-xs tracking-[0.2em]">TOMOKI ISHIKAWA</span>
           </a>
-          <nav className="flex gap-6 text-xs tracking-[0.18em] text-[#55636f]">
+          <nav className="flex gap-5 md:gap-6 text-xs tracking-[0.16em] text-[#55636f]">
             <a href="#about" className="hover:text-[#4a6b93]">ABOUT</a>
             <a href="#research" className="hover:text-[#4a6b93]">RESEARCH</a>
+            <a href="#projects" className="hover:text-[#4a6b93] hidden sm:inline">PROJECTS</a>
             <a href="#teaching" className="hover:text-[#4a6b93]">TEACHING</a>
             <a href="#contact" className="hover:text-[#4a6b93]">CONTACT</a>
           </nav>
@@ -359,6 +375,50 @@ export default function Home() {
                 className="text-xs tracking-[0.25em] text-[#55636f] border-b border-black/20 pb-1 hover:text-[#4a6b93] hover:border-[#4a6b93] transition"
               >
                 VIEW ALL PUBLICATIONS →
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 研究プロジェクト（研究費・助成金） ── */}
+      <section id="projects" className="px-6 py-28 md:py-36 bg-white border-t border-black/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">FUNDING</p></Reveal>
+            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#26333d]">研究プロジェクト</h2></Reveal>
+            <Reveal delay={180}>
+              <p className="mt-5 text-sm text-[#5b6975] leading-relaxed">
+                これまでに携わった主な研究費・助成金です。
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="border-t border-black/10">
+            {projects.map((p, i) => (
+              <Reveal key={p.title} delay={Math.min(i, 6) * 60}>
+                <div className="flex flex-col md:flex-row md:gap-8 py-6 border-b border-black/10">
+                  <span className="text-xs text-[#8a99a8] md:w-36 shrink-0 tabular-nums mb-1 md:mb-0 md:pt-1">
+                    {p.period}
+                  </span>
+                  <div>
+                    <h3 className="text-sm md:text-base text-[#2b3742] leading-relaxed">{p.title}</h3>
+                    <p className="text-xs text-[#93a0af] mt-1.5">{p.funder}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={120}>
+            <div className="text-center mt-12">
+              <a
+                href="https://researchmap.jp/ish0321/research_projects"
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs tracking-[0.25em] text-[#55636f] border-b border-black/20 pb-1 hover:text-[#4a6b93] hover:border-[#4a6b93] transition"
+              >
+                VIEW ALL PROJECTS →
               </a>
             </div>
           </Reveal>
