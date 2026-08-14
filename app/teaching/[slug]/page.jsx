@@ -108,9 +108,9 @@ export default function CoursePage({ params }) {
   return (
     <div
       className="min-h-screen bg-white text-[#1f2530] antialiased"
-      style={{ ["--sans"]: "'Inter', 'Noto Sans JP', sans-serif", fontFamily: "var(--sans)" }}
+      style={{ ["--sans"]: "'Noto Sans JP', sans-serif", fontFamily: "var(--sans)" }}
     >
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap');`}</style>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');`}</style>
 
       <div className="max-w-2xl mx-auto px-6 md:px-8 py-20 md:py-28">
         <Link href="/#teaching" className="text-xs tracking-[0.2em] text-[#33506b] hover:opacity-70">
