@@ -3,7 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
-// スクロールでふわっと現れる
+// ── パレット（添付の早見表を参考） ──
+//  マウンテンブルー #26333d / スレートブルー #4a6b93
+//  クールグレイ #a3adba / ペリウィンクル #eef1f5
+//  ※ 色は要所のみ。基調は白と淡いグレイ。
+
 function Reveal({ children, delay = 0, className = "" }) {
   const ref = useRef(null);
   const [shown, setShown] = useState(false);
@@ -32,8 +36,8 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
-// 背景の淡いネットワーク模様（グレースケール・低濃度）
-function NetworkBg({ opacity = 0.5 }) {
+// 背景の淡いネットワーク模様
+function NetworkBg({ opacity = 0.4 }) {
   const nodes = [
     [90, 110], [200, 70], [300, 170], [170, 210], [70, 280],
     [400, 120], [500, 220], [380, 300], [270, 340], [560, 300],
@@ -52,12 +56,12 @@ function NetworkBg({ opacity = 0.5 }) {
       aria-hidden="true"
       style={{ opacity }}
     >
-      <g stroke="#9aa0a6" strokeWidth="0.6" opacity="0.5">
+      <g stroke="#8a99a8" strokeWidth="0.6" opacity="0.5">
         {edges.map(([a, b], i) => (
           <line key={i} x1={nodes[a][0]} y1={nodes[a][1]} x2={nodes[b][0]} y2={nodes[b][1]} />
         ))}
       </g>
-      <g fill="#9aa0a6">
+      <g fill="#8a99a8">
         {nodes.map(([x, y], i) => (
           <circle key={i} cx={x} cy={y} r={i % 4 === 0 ? 3.4 : 2.2} opacity="0.6" />
         ))}
@@ -69,25 +73,40 @@ function NetworkBg({ opacity = 0.5 }) {
 export default function Home() {
   const interests = ["医療情報学", "医療政策", "医療経済", "臨床疫学"];
 
-  const themes = [
+  const profile = [
     {
-      en: "OBSERVING",
-      title: "データにもとづいて医療を観察する",
+      en: "RESEARCH",
+      title: "研究",
       body:
-        "レセプトや電子カルテなどの記録から、医療の利用や連携のありようを、できるだけ丁寧に読み解くことを心がけています。",
+        "医療情報学を軸に、レセプトや電子カルテなどのデータを分析し、医療の利用や連携のありようを読み解いています。医療機関のつながりをネットワークとして捉える研究にも取り組んでいます。",
     },
     {
-      en: "NETWORKS",
-      title: "医療連携をネットワークとして捉える",
+      en: "EDUCATION",
+      title: "教育",
       body:
-        "医療機関どうしのつながりをネットワークとして眺めることで、地域の医療の姿を少しずつ明らかにしていきます。",
+        "データサイエンス、公衆衛生・疫学、医療経営、経済にわたる科目を担当し、データを丁寧に扱う姿勢を伝えることを大切にしています。",
     },
     {
-      en: "TOWARD SOCIETY",
-      title: "政策や社会への橋渡しを試みる",
+      en: "ENGAGEMENT",
+      title: "政策・社会への提言",
       body:
-        "分析から見えてきたことを、政策や現場の議論に役立てられる形にすることを目指し、研究と教育に取り組んでいます。",
+        "分析から得られた知見を、政策や現場の議論に少しでも役立てられる形にすることを目指しています。",
     },
+  ];
+
+  const positions = [
+    { year: "2026.04 –", text: "自治医科大学 データサイエンスセンター 客員研究員" },
+    { year: "2026.01 –", text: "旭川医科大学 社会医学講座 講師" },
+    { year: "2023.04 –", text: "北海道大学 大学院保健科学研究院 客員准教授" },
+    { year: "2023.04 –", text: "東京大学 大学院医学系研究科 客員研究員" },
+  ];
+
+  const education = [
+    { year: "2021 – 2023", text: "東京大学 大学院医学系研究科 公共健康医学専攻" },
+    { year: "2016 – 2020", text: "北海道大学 大学院保健科学研究院 博士後期課程" },
+    { year: "2013 – 2014", text: "小樽商科大学 大学院商学研究科" },
+    { year: "2011 – 2013", text: "北海道大学 大学院保健科学院 修士課程" },
+    { year: "2007 – 2011", text: "北海道大学 医学部保健学科" },
   ];
 
   const papers = [
@@ -123,20 +142,20 @@ export default function Home() {
 
   const courses = [
     {
+      field: "データサイエンス",
+      items: [
+        { name: "医療情報学", slug: "medical-informatics" },
+        { name: "データ解析入門Ⅰ・Ⅱ", slug: "data-analysis" },
+        { name: "基礎医学特論", slug: "basic-medicine" },
+      ],
+    },
+    {
       field: "公衆衛生・疫学",
       items: [
         { name: "衛生・公衆衛生学", slug: "public-health" },
         { name: "臨床疫学", slug: "clinical-epidemiology" },
         { name: "保健統計", slug: "health-statistics" },
         { name: "医療政策学", slug: "health-policy" },
-      ],
-    },
-    {
-      field: "データサイエンス",
-      items: [
-        { name: "医療情報学", slug: "medical-informatics" },
-        { name: "データ解析入門Ⅰ・Ⅱ", slug: "data-analysis" },
-        { name: "基礎医学特論", slug: "basic-medicine" },
       ],
     },
     {
@@ -159,7 +178,7 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen bg-white text-[#1f2530] antialiased"
+      className="min-h-screen bg-white text-[#2b3742] antialiased"
       style={{ ["--sans"]: "'Inter', 'Noto Sans JP', sans-serif", fontFamily: "var(--sans)" }}
     >
       <style>{`
@@ -172,38 +191,38 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between">
           <a href="#top" className="text-sm tracking-wide font-medium">
             石川 智基
-            <span className="text-[#6b7280] font-normal ml-2 text-xs tracking-[0.2em]">TOMOKI ISHIKAWA</span>
+            <span className="text-[#7a8794] font-normal ml-2 text-xs tracking-[0.2em]">TOMOKI ISHIKAWA</span>
           </a>
-          <nav className="flex gap-6 text-xs tracking-[0.18em] text-[#4b5563]">
-            <a href="#about" className="hover:text-[#33506b]">ABOUT</a>
-            <a href="#research" className="hover:text-[#33506b]">RESEARCH</a>
-            <a href="#teaching" className="hover:text-[#33506b]">TEACHING</a>
-            <a href="#contact" className="hover:text-[#33506b]">CONTACT</a>
+          <nav className="flex gap-6 text-xs tracking-[0.18em] text-[#55636f]">
+            <a href="#about" className="hover:text-[#4a6b93]">ABOUT</a>
+            <a href="#research" className="hover:text-[#4a6b93]">RESEARCH</a>
+            <a href="#teaching" className="hover:text-[#4a6b93]">TEACHING</a>
+            <a href="#contact" className="hover:text-[#4a6b93]">CONTACT</a>
           </nav>
         </div>
       </header>
 
       {/* ── ヒーロー ── */}
       <section id="top" className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#f7f8fa] to-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#eef1f5] to-white" />
         <NetworkBg opacity={0.4} />
         <div className="relative">
           <Reveal>
-            <p className="text-[11px] tracking-[0.4em] text-[#8a94a6] mb-6">
+            <p className="text-[11px] tracking-[0.4em] text-[#7f8ea0] mb-6">
               MEDICAL INFORMATICS ・ HEALTH POLICY
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <h1 className="text-4xl md:text-6xl font-light tracking-wide">石川 智基</h1>
+            <h1 className="text-4xl md:text-6xl font-light tracking-wide text-[#26333d]">石川 智基</h1>
           </Reveal>
           <Reveal delay={300}>
-            <p className="mt-6 text-sm md:text-base text-[#6b7280] leading-relaxed">
+            <p className="mt-6 text-sm md:text-base text-[#5b6975] leading-relaxed">
               旭川医科大学 社会医学講座<br />
               データにもとづく医療の研究と教育
             </p>
           </Reveal>
           <Reveal delay={450}>
-            <a href="#about" className="inline-block mt-12 text-xs tracking-[0.25em] text-[#33506b] border-b border-[#33506b]/40 pb-1 hover:border-[#33506b] transition">
+            <a href="#about" className="inline-block mt-12 text-xs tracking-[0.25em] text-[#4a6b93] border-b border-[#4a6b93]/40 pb-1 hover:border-[#4a6b93] transition">
               LEARN MORE ↓
             </a>
           </Reveal>
@@ -214,62 +233,95 @@ export default function Home() {
       <section id="about" className="px-6 py-28 md:py-36 bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
-            <p className="text-[11px] tracking-[0.35em] text-[#8a94a6] mb-6">ABOUT</p>
+            <p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-6">ABOUT</p>
           </Reveal>
           <Reveal delay={100}>
-            <p className="text-lg md:text-xl leading-loose text-[#374151] font-light">
+            <p className="text-lg md:text-xl leading-loose text-[#3c4854] font-light">
               医療情報学を軸に、特定の分野にとどまらず、データにもとづいて医療や社会の課題に向き合ってきました。分析から得られた知見を、政策や現場の議論に少しでも役立てられるよう、領域を横断した研究と教育に取り組んでいます。
             </p>
           </Reveal>
           <Reveal delay={250}>
             <div className="mt-12 flex flex-wrap justify-center gap-3">
               {interests.map((k) => (
-                <span key={k} className="text-xs tracking-wide border border-black/10 rounded-full px-4 py-1.5 text-[#6b7280]">
+                <span key={k} className="text-xs tracking-wide border border-[#4a6b93]/20 rounded-full px-4 py-1.5 text-[#55636f]">
                   {k}
                 </span>
               ))}
             </div>
           </Reveal>
-          <Reveal delay={350}>
-            <div className="mt-12 text-sm text-[#6b7280] leading-relaxed space-y-1">
-              <p>旭川医科大学 社会医学講座 講師</p>
-              <p>北海道大学 大学院保健科学研究院 客員准教授</p>
-              <p>東京大学 大学院医学系研究科 客員研究員</p>
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* ── 研究の関心（積み重なる帯） ── */}
-      {themes.map((t, i) => (
-        <section
-          key={t.en}
-          className="relative px-6 py-24 md:py-32 overflow-hidden border-t border-black/5"
-          style={{ background: i % 2 === 0 ? "#f6f7f9" : "#ffffff" }}
-        >
-          <NetworkBg opacity={0.16} />
-          <div className="relative max-w-3xl mx-auto text-center">
-            <Reveal>
-              <p className="text-[11px] tracking-[0.35em] text-[#8a94a6] mb-5">{t.en}</p>
-            </Reveal>
-            <Reveal delay={100}>
-              <h2 className="text-xl md:text-3xl font-light mb-6">{t.title}</h2>
-            </Reveal>
-            <Reveal delay={200}>
-              <p className="text-[#6b7280] leading-loose text-sm md:text-base">{t.body}</p>
-            </Reveal>
+      {/* ── プロフィール（3列 / レスポンシブで1列） ── */}
+      <section className="relative px-6 py-24 md:py-32 bg-[#f2f4f7] border-y border-black/5 overflow-hidden">
+        <NetworkBg opacity={0.12} />
+        <div className="relative max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-12 text-center">PROFILE</p>
+          </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+            {profile.map((p, i) => (
+              <Reveal key={p.en} delay={i * 120}>
+                <div className="text-center md:text-left">
+                  <p className="text-[10px] tracking-[0.3em] text-[#93a0af] mb-3">{p.en}</p>
+                  <h3 className="text-lg md:text-xl font-medium mb-4 text-[#26333d]">{p.title}</h3>
+                  <p className="text-sm text-[#5b6975] leading-loose">{p.body}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
+
+      {/* ── 経歴 ── */}
+      <section className="px-6 py-28 md:py-36 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <Reveal>
+            <p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-12 text-center">CAREER</p>
+          </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16">
+            <div>
+              <Reveal>
+                <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">現職</h3>
+              </Reveal>
+              <div className="space-y-5">
+                {positions.map((p, i) => (
+                  <Reveal key={p.text} delay={i * 70}>
+                    <div className="flex gap-4 text-sm">
+                      <span className="text-[#8a99a8] shrink-0 w-24 tabular-nums">{p.year}</span>
+                      <span className="text-[#3c4854] leading-relaxed">{p.text}</span>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+            <div>
+              <Reveal>
+                <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">学歴</h3>
+              </Reveal>
+              <div className="space-y-5">
+                {education.map((e, i) => (
+                  <Reveal key={e.text} delay={i * 70}>
+                    <div className="flex gap-4 text-sm">
+                      <span className="text-[#8a99a8] shrink-0 w-24 tabular-nums">{e.year}</span>
+                      <span className="text-[#3c4854] leading-relaxed">{e.text}</span>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── RESEARCH（英語論文カード） ── */}
-      <section id="research" className="px-6 py-28 md:py-36 bg-white border-t border-black/5">
+      <section id="research" className="px-6 py-28 md:py-36 bg-[#f2f4f7] border-y border-black/5">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <Reveal><p className="text-[11px] tracking-[0.35em] text-[#8a94a6] mb-4">RESEARCH</p></Reveal>
-            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light">主要な論文</h2></Reveal>
+            <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">RESEARCH</p></Reveal>
+            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#26333d]">主要な論文</h2></Reveal>
             <Reveal delay={180}>
-              <p className="mt-5 text-sm text-[#6b7280] leading-relaxed">
+              <p className="mt-5 text-sm text-[#5b6975] leading-relaxed">
                 査読付きの英語論文の一部を紹介します。全業績は researchmap をご覧ください。
               </p>
             </Reveal>
@@ -282,15 +334,15 @@ export default function Home() {
                   href={p.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="group block h-full border border-black/10 rounded-lg p-7 hover:border-[#33506b]/40 hover:shadow-sm transition"
+                  className="group block h-full bg-white border border-black/10 rounded-lg p-7 hover:border-[#4a6b93]/50 hover:shadow-sm transition"
                 >
-                  <p className="text-[11px] tracking-[0.2em] text-[#8a94a6] mb-4">
+                  <p className="text-[11px] tracking-[0.2em] text-[#93a0af] mb-4">
                     {p.journal} ・ {p.year}
                   </p>
-                  <h3 className="text-base md:text-lg leading-relaxed text-[#1f2530] group-hover:text-[#33506b] transition">
+                  <h3 className="text-base md:text-lg leading-relaxed text-[#2b3742] group-hover:text-[#4a6b93] transition">
                     {p.title}
                   </h3>
-                  <span className="inline-block mt-5 text-xs tracking-[0.2em] text-[#33506b]">
+                  <span className="inline-block mt-5 text-xs tracking-[0.2em] text-[#4a6b93]">
                     VIEW ARTICLE →
                   </span>
                 </a>
@@ -304,7 +356,7 @@ export default function Home() {
                 href="https://researchmap.jp/ish0321/published_papers"
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs tracking-[0.25em] text-[#4b5563] border-b border-black/20 pb-1 hover:text-[#33506b] hover:border-[#33506b] transition"
+                className="text-xs tracking-[0.25em] text-[#55636f] border-b border-black/20 pb-1 hover:text-[#4a6b93] hover:border-[#4a6b93] transition"
               >
                 VIEW ALL PUBLICATIONS →
               </a>
@@ -314,14 +366,14 @@ export default function Home() {
       </section>
 
       {/* ── TEACHING ── */}
-      <section id="teaching" className="px-6 py-28 md:py-36 bg-[#f6f7f9] border-t border-black/5">
+      <section id="teaching" className="px-6 py-28 md:py-36 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <Reveal><p className="text-[11px] tracking-[0.35em] text-[#8a94a6] mb-4">TEACHING</p></Reveal>
-            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light">講義</h2></Reveal>
+            <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">TEACHING</p></Reveal>
+            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#26333d]">講義</h2></Reveal>
             <Reveal delay={180}>
-              <p className="mt-5 text-sm text-[#6b7280] leading-relaxed">
-                担当する科目を分野ごとにまとめています。科目名から資料のページへ移動できます。
+              <p className="mt-5 text-sm text-[#5b6975] leading-relaxed">
+                担当する科目を分野ごとにまとめています。科目名から資料のページへ移動できます。（準備中）
               </p>
             </Reveal>
           </div>
@@ -329,14 +381,14 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-5">
             {courses.map((c, i) => (
               <Reveal key={c.field} delay={i * 80}>
-                <div className="bg-white border border-black/10 rounded-lg p-7 h-full">
-                  <p className="text-[11px] tracking-[0.2em] text-[#8a94a6] mb-5">{c.field}</p>
+                <div className="bg-[#f7f8fa] border border-black/10 rounded-lg p-7 h-full">
+                  <p className="text-[11px] tracking-[0.2em] text-[#93a0af] mb-5">{c.field}</p>
                   <div className="flex flex-wrap gap-2">
                     {c.items.map((it) => (
                       <Link
                         key={it.slug}
                         href={`/teaching/${it.slug}`}
-                        className="text-sm border border-black/10 rounded-full px-3.5 py-1 text-[#4b5563] hover:bg-[#33506b] hover:text-white hover:border-[#33506b] transition"
+                        className="text-sm border border-black/10 rounded-full px-3.5 py-1 text-[#55636f] hover:bg-[#4a6b93] hover:text-white hover:border-[#4a6b93] transition"
                       >
                         {it.name}
                       </Link>
@@ -350,22 +402,22 @@ export default function Home() {
       </section>
 
       {/* ── CONTACT ── */}
-      <section id="contact" className="px-6 py-28 md:py-36 bg-white border-t border-black/5">
+      <section id="contact" className="px-6 py-28 md:py-36 bg-[#f2f4f7] border-t border-black/5">
         <div className="max-w-3xl mx-auto text-center">
-          <Reveal><p className="text-[11px] tracking-[0.35em] text-[#8a94a6] mb-4">CONTACT</p></Reveal>
+          <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">CONTACT</p></Reveal>
           <Reveal delay={100}>
-            <p className="text-lg md:text-xl font-light leading-loose text-[#374151]">
+            <p className="text-lg md:text-xl font-light leading-loose text-[#3c4854]">
               研究・教育に関するお問い合わせは、<br className="md:hidden" />下記のプロフィールからお願いいたします。
             </p>
           </Reveal>
           <Reveal delay={200}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <a href="https://researchmap.jp/ish0321" target="_blank" rel="noreferrer"
-                 className="border border-black/15 rounded-full px-7 py-3 text-xs tracking-[0.2em] text-[#4b5563] hover:bg-[#33506b] hover:text-white hover:border-[#33506b] transition">
+                 className="border border-[#4a6b93]/30 rounded-full px-7 py-3 text-xs tracking-[0.2em] text-[#55636f] hover:bg-[#4a6b93] hover:text-white hover:border-[#4a6b93] transition">
                 researchmap
               </a>
               <a href="https://orcid.org/0000-0001-8725-6508" target="_blank" rel="noreferrer"
-                 className="border border-black/15 rounded-full px-7 py-3 text-xs tracking-[0.2em] text-[#4b5563] hover:bg-[#33506b] hover:text-white hover:border-[#33506b] transition">
+                 className="border border-[#4a6b93]/30 rounded-full px-7 py-3 text-xs tracking-[0.2em] text-[#55636f] hover:bg-[#4a6b93] hover:text-white hover:border-[#4a6b93] transition">
                 ORCID
               </a>
             </div>
@@ -374,7 +426,7 @@ export default function Home() {
       </section>
 
       {/* ── フッター ── */}
-      <footer className="px-6 py-10 bg-[#1f2530] text-[#9aa0a6]">
+      <footer className="px-6 py-10 bg-[#26333d] text-[#9aa6b2]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-2 text-xs">
           <span className="text-white tracking-wide">石川 智基 ・ Tomoki Ishikawa</span>
           <span>© Tomoki Ishikawa</span>
