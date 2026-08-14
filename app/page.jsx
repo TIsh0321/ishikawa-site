@@ -132,7 +132,7 @@ export default function Home() {
   ];
 
   const pastPositions = [
-    { year: "2024 – 2025", text: "OECD 雇用労働社会問題局（DELSA）" },
+    { year: "2025", text: "OECD 雇用労働社会問題局（DELSA）" },
     { year: "2022.10 – 2025", text: "医療経済研究機構 主席研究員" },
     { year: "2017.04 – 2018", text: "北海道大学 大学院保健科学研究院 助教／特任助教" },
   ];
@@ -327,7 +327,7 @@ export default function Home() {
 
       {/* ── 経歴 ── */}
       <section className="relative px-6 py-28 md:py-36 bg-white overflow-hidden">
-        <GeoBg className="absolute -right-40 -top-24 w-[520px] h-[520px] hidden md:block" opacity={0.05} />
+        <GeoBg className="absolute -right-24 -top-12 w-[440px] h-[440px] hidden md:block" opacity={0.09} />
         <div className="relative max-w-4xl mx-auto">
           <Reveal>
             <p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-12 text-center">CAREER</p>
@@ -341,7 +341,7 @@ export default function Home() {
                 </Reveal>
                 {/* 本務 */}
                 <Reveal>
-                  <div className="border border-[#4a6b93]/30 bg-[#4a6b93]/[0.05] rounded-lg p-5 mb-6">
+                  <div className="mb-6">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-[10px] tracking-[0.15em] text-white bg-[#4a6b93] rounded px-2 py-0.5">本務</span>
                       <span className="text-xs text-[#8a99a8] tabular-nums">2026.01 –</span>
@@ -404,7 +404,7 @@ export default function Home() {
 
       {/* ── RESEARCH（英語論文カード） ── */}
       <section id="research" className="relative px-6 py-28 md:py-36 bg-[#f2f4f7] border-y border-black/5 overflow-hidden">
-        <GeoBg className="absolute -left-40 -bottom-32 w-[520px] h-[520px] hidden md:block" opacity={0.06} />
+        <GeoBg className="absolute -left-24 -bottom-16 w-[440px] h-[440px] hidden md:block" opacity={0.09} />
         <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">RESEARCH</p></Reveal>
