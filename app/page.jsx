@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 // ── パレット（添付の早見表を参考） ──
-//  マウンテンブルー #26333d / スレートブルー #4a6b93
+//  マウンテンブルー #1f3a5f / スレートブルー #0f766e
 //  クールグレイ #a3adba / ペリウィンクル #eef1f5
 //  ※ 色は要所のみ。基調は白と淡いグレイ。
 
@@ -56,12 +56,12 @@ function NetworkBg({ opacity = 0.4 }) {
       aria-hidden="true"
       style={{ opacity }}
     >
-      <g stroke="#8a99a8" strokeWidth="0.6" opacity="0.5">
+      <g stroke="#5f9e98" strokeWidth="0.6" opacity="0.5">
         {edges.map(([a, b], i) => (
           <line key={i} x1={nodes[a][0]} y1={nodes[a][1]} x2={nodes[b][0]} y2={nodes[b][1]} />
         ))}
       </g>
-      <g fill="#8a99a8">
+      <g fill="#5f9e98">
         {nodes.map(([x, y], i) => (
           <circle key={i} cx={x} cy={y} r={i % 4 === 0 ? 3.4 : 2.2} opacity="0.6" />
         ))}
@@ -74,7 +74,7 @@ function NetworkBg({ opacity = 0.4 }) {
 function GeoBg({ className, opacity = 0.06 }) {
   return (
     <svg className={className} viewBox="0 0 400 400" aria-hidden="true" style={{ opacity }}>
-      <g fill="none" stroke="#4a6b93" strokeWidth="1">
+      <g fill="none" stroke="#0f766e" strokeWidth="1">
         {[50, 95, 140, 185].map((r) => (
           <circle key={r} cx="200" cy="200" r={r} />
         ))}
@@ -91,7 +91,7 @@ function GeoBg({ className, opacity = 0.06 }) {
           );
         })}
       </g>
-      <g fill="#4a6b93">
+      <g fill="#0f766e">
         {[0, 3, 6, 9].map((i) => {
           const a = (i * Math.PI) / 6;
           return <circle key={i} cx={200 + Math.cos(a) * 140} cy={200 + Math.sin(a) * 140} r="4" />;
@@ -245,11 +245,11 @@ export default function Home() {
             <span className="text-[#7a8794] font-semibold ml-2 text-xs tracking-[0.2em]">TOMOKI ISHIKAWA</span>
           </a>
           <nav className="flex gap-5 md:gap-6 text-xs tracking-[0.16em] text-[#3c4854] font-bold">
-            <a href="#about" className="hover:text-[#4a6b93]">ABOUT</a>
-            <a href="#research" className="hover:text-[#4a6b93]">RESEARCH</a>
-            <a href="#projects" className="hover:text-[#4a6b93] hidden sm:inline">PROJECTS</a>
-            <a href="#teaching" className="hover:text-[#4a6b93]">TEACHING</a>
-            <a href="#contact" className="hover:text-[#4a6b93]">CONTACT</a>
+            <a href="#about" className="hover:text-[#0f766e]">ABOUT</a>
+            <a href="#research" className="hover:text-[#0f766e]">RESEARCH</a>
+            <a href="#projects" className="hover:text-[#0f766e] hidden sm:inline">PROJECTS</a>
+            <a href="#teaching" className="hover:text-[#0f766e]">TEACHING</a>
+            <a href="#contact" className="hover:text-[#0f766e]">CONTACT</a>
           </nav>
         </div>
       </header>
@@ -265,7 +265,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <h1 className="text-4xl md:text-6xl font-light tracking-wide text-[#26333d]">石川 智基</h1>
+            <h1 className="text-4xl md:text-6xl font-light tracking-wide text-[#1f3a5f]">石川 智基</h1>
           </Reveal>
           <Reveal delay={300}>
             <p className="mt-6 text-sm md:text-base text-[#5b6975] leading-relaxed">
@@ -274,7 +274,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal delay={450}>
-            <a href="#about" className="inline-block mt-12 text-xs tracking-[0.25em] text-[#4a6b93] border-b border-[#4a6b93]/40 pb-1 hover:border-[#4a6b93] transition">
+            <a href="#about" className="inline-block mt-12 text-xs tracking-[0.25em] text-[#0f766e] border-b border-[#0f766e]/40 pb-1 hover:border-[#0f766e] transition">
               LEARN MORE ↓
             </a>
           </Reveal>
@@ -295,7 +295,7 @@ export default function Home() {
           <Reveal delay={250}>
             <div className="mt-12 flex flex-wrap justify-center gap-3">
               {interests.map((k) => (
-                <span key={k} className="text-xs tracking-wide border border-[#4a6b93]/20 rounded-full px-4 py-1.5 text-[#55636f]">
+                <span key={k} className="text-xs tracking-wide border border-[#0f766e]/20 rounded-full px-4 py-1.5 text-[#55636f]">
                   {k}
                 </span>
               ))}
@@ -316,7 +316,7 @@ export default function Home() {
               <Reveal key={p.en} delay={i * 120}>
                 <div className="text-center md:text-left">
                   <p className="text-[10px] tracking-[0.3em] text-[#93a0af] mb-3">{p.en}</p>
-                  <h3 className="text-lg md:text-xl font-medium mb-4 text-[#26333d]">{p.title}</h3>
+                  <h3 className="text-lg md:text-xl font-medium mb-4 text-[#1f3a5f]">{p.title}</h3>
                   <p className="text-sm text-[#5b6975] leading-loose">{p.body}</p>
                 </div>
               </Reveal>
@@ -337,16 +337,16 @@ export default function Home() {
             <div className="space-y-12">
               <div>
                 <Reveal>
-                  <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">現職</h3>
+                  <h3 className="text-base font-medium text-[#1f3a5f] mb-6 pb-3 border-b border-[#0f766e]/25">現職</h3>
                 </Reveal>
                 {/* 本務 */}
                 <Reveal>
                   <div className="mb-6">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[10px] tracking-[0.15em] text-white bg-[#4a6b93] rounded px-2 py-0.5">本務</span>
+                      <span className="text-[10px] tracking-[0.15em] text-white bg-[#0f766e] rounded px-2 py-0.5">本務</span>
                       <span className="text-xs text-[#8a99a8] tabular-nums">2026.01 –</span>
                     </div>
-                    <p className="text-[#26333d] font-medium leading-relaxed">旭川医科大学 社会医学講座 講師</p>
+                    <p className="text-[#1f3a5f] font-medium leading-relaxed">旭川医科大学 社会医学講座 講師</p>
                   </div>
                 </Reveal>
                 {/* 兼務 */}
@@ -367,7 +367,7 @@ export default function Home() {
 
               <div>
                 <Reveal>
-                  <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">職歴</h3>
+                  <h3 className="text-base font-medium text-[#1f3a5f] mb-6 pb-3 border-b border-[#0f766e]/25">職歴</h3>
                 </Reveal>
                 <div className="space-y-5">
                   {pastPositions.map((p, i) => (
@@ -385,7 +385,7 @@ export default function Home() {
             {/* 右：学歴 */}
             <div>
               <Reveal>
-                <h3 className="text-base font-medium text-[#26333d] mb-6 pb-3 border-b border-[#4a6b93]/25">学歴</h3>
+                <h3 className="text-base font-medium text-[#1f3a5f] mb-6 pb-3 border-b border-[#0f766e]/25">学歴</h3>
               </Reveal>
               <div className="space-y-5">
                 {education.map((e, i) => (
@@ -408,7 +408,7 @@ export default function Home() {
         <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">RESEARCH</p></Reveal>
-            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#26333d]">主要な論文</h2></Reveal>
+            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#1f3a5f]">主要な論文</h2></Reveal>
             <Reveal delay={180}>
               <p className="mt-5 text-sm text-[#5b6975] leading-relaxed">
                 査読付きの英語論文の一部を紹介します。全業績は researchmap をご覧ください。
@@ -423,15 +423,15 @@ export default function Home() {
                   href={p.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="group block h-full bg-white border border-black/10 rounded-lg p-7 hover:border-[#4a6b93]/50 hover:shadow-sm transition"
+                  className="group block h-full bg-white border border-black/10 rounded-lg p-7 hover:border-[#0f766e]/50 hover:shadow-sm transition"
                 >
                   <p className="text-[11px] tracking-[0.2em] text-[#93a0af] mb-4">
                     {p.journal} ・ {p.year}
                   </p>
-                  <h3 className="text-base md:text-lg leading-relaxed text-[#2b3742] group-hover:text-[#4a6b93] transition">
+                  <h3 className="text-base md:text-lg leading-relaxed text-[#2b3742] group-hover:text-[#0f766e] transition">
                     {p.title}
                   </h3>
-                  <span className="inline-block mt-5 text-xs tracking-[0.2em] text-[#4a6b93]">
+                  <span className="inline-block mt-5 text-xs tracking-[0.2em] text-[#0f766e]">
                     VIEW ARTICLE →
                   </span>
                 </a>
@@ -445,7 +445,7 @@ export default function Home() {
                 href="https://researchmap.jp/ish0321/published_papers"
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs tracking-[0.25em] text-[#55636f] border-b border-black/20 pb-1 hover:text-[#4a6b93] hover:border-[#4a6b93] transition"
+                className="text-xs tracking-[0.25em] text-[#55636f] border-b border-black/20 pb-1 hover:text-[#0f766e] hover:border-[#0f766e] transition"
               >
                 VIEW ALL PUBLICATIONS →
               </a>
@@ -459,10 +459,10 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">FUNDING</p></Reveal>
-            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#26333d]">研究プロジェクト</h2></Reveal>
+            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#1f3a5f]">研究プロジェクト</h2></Reveal>
             <Reveal delay={180}>
               <p className="mt-5 text-sm text-[#5b6975] leading-relaxed">
-                これまでに携わった主な研究費・助成金です。
+                これまでに携わった主な共同研究プロジェクト・競争的研究費／助成金です。
               </p>
             </Reveal>
           </div>
@@ -489,7 +489,7 @@ export default function Home() {
                 href="https://researchmap.jp/ish0321/research_projects"
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs tracking-[0.25em] text-[#55636f] border-b border-black/20 pb-1 hover:text-[#4a6b93] hover:border-[#4a6b93] transition"
+                className="text-xs tracking-[0.25em] text-[#55636f] border-b border-black/20 pb-1 hover:text-[#0f766e] hover:border-[#0f766e] transition"
               >
                 VIEW ALL PROJECTS →
               </a>
@@ -503,7 +503,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <Reveal><p className="text-[11px] tracking-[0.35em] text-[#7f8ea0] mb-4">TEACHING</p></Reveal>
-            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#26333d]">講義</h2></Reveal>
+            <Reveal delay={100}><h2 className="text-2xl md:text-3xl font-light text-[#1f3a5f]">講義</h2></Reveal>
             <Reveal delay={180}>
               <p className="mt-5 text-sm text-[#5b6975] leading-relaxed">
                 担当する科目を分野ごとにまとめています。科目名から資料のページへ移動できます。（準備中）
@@ -521,7 +521,7 @@ export default function Home() {
                       <Link
                         key={it.slug}
                         href={`/teaching/${it.slug}`}
-                        className="text-sm border border-black/10 rounded-full px-3.5 py-1 text-[#55636f] hover:bg-[#4a6b93] hover:text-white hover:border-[#4a6b93] transition"
+                        className="text-sm border border-black/10 rounded-full px-3.5 py-1 text-[#55636f] hover:bg-[#0f766e] hover:text-white hover:border-[#0f766e] transition"
                       >
                         {it.name}
                       </Link>
@@ -546,11 +546,11 @@ export default function Home() {
           <Reveal delay={200}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <a href="https://researchmap.jp/ish0321" target="_blank" rel="noreferrer"
-                 className="border border-[#4a6b93]/30 rounded-full px-7 py-3 text-xs tracking-[0.2em] text-[#55636f] hover:bg-[#4a6b93] hover:text-white hover:border-[#4a6b93] transition">
+                 className="border border-[#0f766e]/30 rounded-full px-7 py-3 text-xs tracking-[0.2em] text-[#55636f] hover:bg-[#0f766e] hover:text-white hover:border-[#0f766e] transition">
                 researchmap
               </a>
               <a href="https://orcid.org/0000-0001-8725-6508" target="_blank" rel="noreferrer"
-                 className="border border-[#4a6b93]/30 rounded-full px-7 py-3 text-xs tracking-[0.2em] text-[#55636f] hover:bg-[#4a6b93] hover:text-white hover:border-[#4a6b93] transition">
+                 className="border border-[#0f766e]/30 rounded-full px-7 py-3 text-xs tracking-[0.2em] text-[#55636f] hover:bg-[#0f766e] hover:text-white hover:border-[#0f766e] transition">
                 ORCID
               </a>
             </div>
@@ -559,7 +559,7 @@ export default function Home() {
       </section>
 
       {/* ── フッター ── */}
-      <footer className="px-6 py-10 bg-[#26333d] text-[#9aa6b2]">
+      <footer className="px-6 py-10 bg-[#1f3a5f] text-[#9aa6b2]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-2 text-xs">
           <span className="text-white tracking-wide">石川 智基 ・ Tomoki Ishikawa</span>
           <span>© Tomoki Ishikawa</span>
